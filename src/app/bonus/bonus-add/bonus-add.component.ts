@@ -240,10 +240,13 @@ export class BonusAddComponent implements OnInit {
     this.data.created_by = this.service.datauser.id;
     this.data.created_by_name=this.logined_user_data.name;
     this.data.created_by_id=this.logined_user_data.id;
-    this.savingFlag = true;
+    this.savingFlag = true; 
     this.data.state = this.form_statelist;
     this.data.district = this.form_districtlist;
     this.data.influencer_ids = this.selInfluncer;
+    this.data.types = 'Influencer';
+    this.data.influencer_type = '3'
+
     this.service.post_rqst( {'scheme':this.data,  'productPoint':productPoint,}, 'Bonus/addBonus').subscribe((resp)=>
     {
       if(resp['statusCode'] == 200){

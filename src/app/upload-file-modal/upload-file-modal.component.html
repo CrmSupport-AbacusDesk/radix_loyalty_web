@@ -31,8 +31,8 @@
 
         </div>
         <!-- <div class="excel-container "style="width:50%">
-            
-            
+
+
         </div> -->
         <div mat-dialog-actions>
             <button mat-raised-button color="warn" [mat-dialog-close]="false">Close</button>
@@ -170,8 +170,8 @@
 
         </div>
         <!-- <div class="excel-container "style="width:50%">
-            
-            
+
+
         </div> -->
         <div mat-dialog-actions>
             <button mat-stroked-button color="warn" [mat-dialog-close]="false">Close</button>
@@ -729,8 +729,7 @@
 
 
 <div class="edit-modal" *ngIf="come_from == 'uploadSegment'">
-    <p class="heading">{{savingFlag == true ? 'Please Wait ...': (modal_type=='insert'?'Upload
-        Category':modal_type=='update'?'Update Category':null)}}</p>
+    <p class="heading">{{savingFlag == true ? 'Please Wait ...': (modal_type=='insert'?'UploadCategory':modal_type=='update'?'Update Category':null)}}</p>
     <div mat-dialog-content>
         <div class="dialog-content">
             <div class="excel-box">
@@ -851,6 +850,49 @@
     </div>
 </div>
 
+
+<div class="edit-modal" *ngIf="come_from == 'Coupon'">
+
+  <div *ngIf="loader">
+      <mat-spinner class="loader">
+          <div>
+              <p>Loading....</p>
+          </div>
+      </mat-spinner>
+  </div>
+
+  <p mat-dialog-title>Upload Coupon</p>
+  <div mat-dialog-content>
+      <div class="dialog-content">
+          <div class="excel-box">
+              <label>
+                  <form name="couponForm" #f="ngForm" novalidate autocomplete="off">
+                      <input type="file" (change)="onUploadChange($event)" name="fileupload"
+                          accept=".csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                          style="display: none;">
+                  </form>
+                  <i class="material-icons">
+                      cloud_upload
+                  </i>
+
+                  <p *ngIf="excel_name == ''">Click Here To Upload Excel(In csv format)</p>
+                  <p *ngIf="excel_name != ''">{{excel_name}}</p>
+              </label>
+
+              <a  href="{{url}}sample_file/coupon Code.csv"
+                  target="_blank"><i class="material-icons">download</i>sample file</a>
+
+          </div>
+      </div>
+  </div>
+  <div mat-dialog-actions>
+      <button mat-stroked-button color="warn" [mat-dialog-close]="false">Cancel</button>
+      <button mat-raised-button color="accent" [disabled]="excel_loader == true"
+          [ngClass]="{'loading': excel_loader == true}" (click)="upload_bonus_user_data_excel(modal_type)"
+          accept=".csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">{{excel_loader
+          == true ? 'Saving' : 'Upload'}}</button>
+  </div>
+</div>
 
 <div class="edit-modal" *ngIf="come_from == 'Travel Plan'">
     <div style="display:flex; justify-content:space-between">

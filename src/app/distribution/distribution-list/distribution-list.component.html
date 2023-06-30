@@ -454,11 +454,11 @@
         <mat-icon>currency_rupee</mat-icon>
         <span>Credit Limit</span>
       </button>
-      <button mat-menu-item (click)="upload_excel('geo_location');"
+      <!-- <button mat-menu-item (click)="upload_excel('geo_location');"
         *ngIf="dr_list_temp.length > 0 && ( assign_login_data2.import_customer_network=='1' || (type_id==1 && assign_login_data2.import_channel_partner=='1') || (type_id==3 && assign_login_data2.import_dealer=='1') || (type_id==7 && assign_login_data2.import_direct_dealers=='1'))">
         <mat-icon>edit_location_alt</mat-icon>
         <span>Update Geo Location</span>
-      </button>
+      </button> -->
       <button mat-menu-item (click)="downloadExcel();"
         *ngIf="dr_list_temp.length > 0 && ((assign_login_data2.export_customer_network=='1' || (type_id==1 && assign_login_data2.export_channel_partner=='1') || (type_id==3 && assign_login_data2.export_dealer=='1') || (type_id==7 && assign_login_data2.export_direct_dealers=='1')) )">
         <mat-icon>download</mat-icon>

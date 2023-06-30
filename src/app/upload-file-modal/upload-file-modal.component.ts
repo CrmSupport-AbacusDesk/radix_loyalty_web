@@ -863,13 +863,13 @@ export class UploadFileModalComponent implements OnInit {
 
   upload_bonus_user_data_excel() {
     this.dialogRef.disableClose = true;
-    this.formData.append('category', this.file, this.file.name);
-    this.formData.append('district', this.data['district'])
-    this.formData.append('userType', this.data['user_type'])
-    this.formData.append('bonus_id', this.data['bonus_id'])
-    this.formData.append('influencerType', this.data['influencer_type'])
+    this.formData.append('file', this.file, this.file.name);
+    // this.formData.append('district', this.data['district'])
+    // this.formData.append('userType', this.data['user_type'])
+    // this.formData.append('bonus_id', this.data['bonus_id'])
+    // this.formData.append('influencerType', this.data['influencer_type'])
     this.excel_loader = true;
-    this.serve.FileData(this.formData, 'Bonus/uploadBonusInfluencerInBulk')
+    this.serve.FileData(this.formData, 'CouponCode/uploadCouponCode')
 
       .subscribe(d => {
 
@@ -877,6 +877,18 @@ export class UploadFileModalComponent implements OnInit {
         this.formData = new FormData();
         if (d['statusCode'] == 200) {
           this.dialog.success("Excel Uploaded", d['statusMsg']);
+          this.dialogRef.close();
+          setTimeout(() => {
+            this.excel_loader = false;
+
+          }, 700);
+
+
+          return;
+        }
+
+       else if (d['statusCode'] == 400) {
+          this.dialog.error(d['case']  +  d['product']);
           this.dialogRef.close();
           setTimeout(() => {
             this.excel_loader = false;
@@ -1018,20 +1030,20 @@ export class UploadFileModalComponent implements OnInit {
         this.excel_loader=false;
         this.serve.dr_list();
       }
-      else { 
+      else {
         console.log(d);
-        
 
-        
+
+
         this.dialog.error(d['statusMsg']);
         setTimeout (() => {
           this.excel_loader='';
         }, 700);
-   
-        
+
+
       }
       if (d['response'].length) {
-        this.uploadError=true; 
+        this.uploadError=true;
         this.uploadErrorMsg = d['response'];
         // this.uploadErrorMsgCount = d['response'];
         this.excel_loader=false;
@@ -1054,15 +1066,15 @@ export class UploadFileModalComponent implements OnInit {
         this.excel_loader=false;
         this.serve.dr_list();
       }
-      else { 
+      else {
         console.log(d);
         this.dialog.error(d['statusMsg']);
         setTimeout (() => {
           this.excel_loader='';
-        }, 700);      
+        }, 700);
       }
       if (d['response'].length) {
-        this.uploadError=true; 
+        this.uploadError=true;
         this.uploadErrorMsg = d['response'];
         // this.uploadErrorMsgCount = d['response'];
         this.excel_loader=false;
@@ -1087,15 +1099,15 @@ export class UploadFileModalComponent implements OnInit {
           this.excel_loader=false;
           this.serve.dr_list();
         }
-        else { 
+        else {
           console.log(d);
           this.dialog.error(d['statusMsg']);
           setTimeout (() => {
             this.excel_loader='';
-          }, 700);      
+          }, 700);
         }
         if (d['response'].length) {
-          this.uploadError=true; 
+          this.uploadError=true;
           this.uploadErrorMsg = d['response'];
           // this.uploadErrorMsgCount = d['response'];
           this.excel_loader=false;

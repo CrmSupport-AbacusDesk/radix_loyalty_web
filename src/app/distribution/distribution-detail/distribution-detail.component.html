@@ -27,16 +27,12 @@
                 <button mat-button *ngIf="user_type == '1'" [ngClass]="{'active' :tabType== 'Retailer'}"
                     (click)="clearFilter();  getRetailer(); tabType = 'Retailer'"><i
                         class="material-icons">storefront</i>Dealer</button>
-                <!-- <button mat-button *ngIf="user_type != '3'" [ngClass]="{'active' :tabType== 'Target'}"
+                <button mat-button *ngIf="user_type != '3'" [ngClass]="{'active' :tabType== 'Target'}"
                     (click)="clearFilter(); getTarget(currentMonth_no,currentYear); tabType = 'Target'"><i
-                        class="material-icons">trending_up</i>Target</button> -->
-                <!-- <button mat-button *ngIf="user_type != '3'" [ngClass]="{'active' :tabType== 'Ledger'}"
+                        class="material-icons">trending_up</i>Target</button>
+                <button mat-button *ngIf="user_type != '3'" [ngClass]="{'active' :tabType== 'Ledger'}"
                     (click)="clearFilter(); getLedger(); tabType = 'Ledger'"><i
-                        class="material-icons">receipt_long</i>Account Ledger</button> -->
-
-                        <button mat-button [ngClass]="{'active' :tabType== 'transaction'}"
-                        (click)="tabType = 'transaction'; getLedger()"><i class="material-icons">swap_horiz</i>Wallet
-                        Transaction</button>
+                        class="material-icons">receipt_long</i>Account Ledger</button>
 
                 <!-- <button mat-button *ngIf="user_type != '7'" [ngClass]="{'active' :tabType== 'Point Ledger'}"
                     (click)="clearFilter(); getPointLedger(); tabType = 'Point Ledger'"><i
@@ -1510,7 +1506,7 @@
 
 
 
-        <!-- <div *ngIf="tabType== 'Ledger'" style="margin: -10px -10px 0px -10px;">
+        <div *ngIf="tabType== 'Ledger'" style="margin: -10px -10px 0px -10px;">
             <div class="tools-container no-sticky">
                 <div class="mat-tabbar">
                     <button mat-button [ngClass]="{'active' :ledgerType== 'ledger'}"
@@ -1519,12 +1515,12 @@
                     <button mat-button [ngClass]="{'active' :ledgerType== 'billing'}"
                         (click)="clearFilter(); invoice_data(currentMonth_no,currentYear); ledgerType= 'billing'"><i
                             class="material-icons">receipt</i>Invoice</button>
-                    <button mat-button [ngClass]="{'active' :ledgerType== 'payment'}"
+                    <!-- <button mat-button [ngClass]="{'active' :ledgerType== 'payment'}"
                         (click)="clearFilter(); payment_data(currentMonth_no,currentYear); ledgerType = 'payment'"><i
                             class="material-icons">receipt</i>Payment</button>
                     <button mat-button [ngClass]="{'active' :ledgerType== 'credit_note'}"
                         (click)="clearFilter(); cn_data(currentMonth_no,currentYear); ledgerType = 'credit_note'"><i
-                            class="material-icons">receipt</i>Credit Note</button>
+                            class="material-icons">receipt</i>Credit Note</button> -->
                 </div>
                 <div class="left-auto df flex-gap-10">
                     <a mat-icon-button matTooltip="Refresh" (click)="refresh(tabType)">
@@ -2001,375 +1997,8 @@
                     <app-not-result-found></app-not-result-found>
                 </ng-container>
             </div>
-        </div> -->
+        </div>
 
-        <div *ngIf="tabType== 'transaction'" style="margin: -10px -10px 0px -10px;">
-            <div class="tools-container no-sticky">
-              <div class="mat-tabbar">
-                <button mat-button [ngClass]="{'active' :wallet_history_type== 'ledger'}"
-                  (click)="clearFilter(); getLedger(); wallet_history_type= 'ledger'">
-                  <i class="material-icons">receipt_long</i>
-                  Ledger
-                </button>
-                <button mat-button [ngClass]="{'active' :wallet_history_type== 'scan_history'}"
-                  (click)="clearFilter(); scan_history_data(); wallet_history_type= 'scan_history'"
-                 >
-                 <!-- *ngIf="checkRight.scanning_rights == 'Yes'" -->
-                  <i class="material-icons">qr_code_scanner</i>
-                  Scan History
-                </button>
-                <button mat-button [ngClass]="{'active' :wallet_history_type== 'redeem_history'}"
-                  (click)="clearFilter(); redeem_history_data(); wallet_history_type = 'redeem_history'">
-                  <i class="material-icons">redeem</i>
-                  Redeem History
-                </button>
-              </div>
-      
-      
-      
-              <div class="left-auto df flex-gap-10">
-                <a mat-icon-button matTooltip="Refresh" (click)="refresh()">
-                  <i class="material-icons">refresh</i>
-                </a>
-      
-                <div class="pagination"
-                  *ngIf="(ledgerData.length > 0 && wallet_history_type== 'ledger')">
-                  <div class="pagination-content">
-                    Pages
-                    <span>{{pagenumber}}</span>
-                    of
-                    <span>{{total_page}}</span>
-                  </div>
-                  <div class="page-nav">
-                    <button mat-icon-button matTooltip="Older" (click)="pervious(tabType)"
-                      [disabled]="start == 0 || total_page == 0">
-                      <i class="material-icons">navigate_before</i>
-                    </button>
-                    <button mat-icon-button matTooltip="Newer" (click)="nextPage(tabType)"
-                      [disabled]="pagenumber == total_page || total_page == 0 ">
-                      <i class="material-icons">navigate_next</i>
-                    </button>
-                  </div>
-                </div>
-      
-                <div class="pagination"
-                *ngIf="(redeemHistory.length > 0 && wallet_history_type== 'redeem_history')">
-                <div class="pagination-content">
-                  Pages
-                  <span>{{pagenumber}}</span>
-                  of
-                  <span>{{total_page}}</span>
-                </div>
-                <div class="page-nav">
-                  <button mat-icon-button matTooltip="Older" (click)="pervious(tabType)"
-                    [disabled]="start == 0 || total_page == 0">
-                    <i class="material-icons">navigate_before</i>
-                  </button>
-                  <button mat-icon-button matTooltip="Newer" (click)="nextPage(tabType)"
-                    [disabled]="pagenumber == total_page || total_page == 0 ">
-                    <i class="material-icons">navigate_next</i>
-                  </button>
-                </div>
-              </div>
-              </div>
-      
-            </div>
-            <div class="cs-table" *ngIf="wallet_history_type== 'ledger'">
-              <div class="sticky-head" style="top: -10px;">
-                <div class="table-head">
-                  <table>
-                    <tr>
-                      <th class="w60">S.no.</th>
-                      <th class="w150">Date</th>
-                      <th class="w150">Transaction Type</th>
-                      <th class="text-right">Credit</th>
-                      <th class="text-right">Debit</th>
-                      <th class="w160 text-right">Balance</th>
-                    </tr>
-                  </table>
-                </div>
-                <div class="table-head border-top">
-                  <table class="sno-border">
-                    <tr>
-                      <th class="w60">&nbsp;</th>
-                      <th class="w150">
-                        <div class="th-search-acmt">
-                          <mat-form-field class="cs-input date-column infix-bodr">
-                            <input matInput [matDatepicker]="picker1" placeholder="Date" name="date"
-                              [(ngModel)]="filter.date_created" (dateChange)="date_format(tabType)" disabled>
-                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                            <mat-datepicker #picker1 disabled="false"></mat-datepicker>
-                          </mat-form-field>
-                        </div>
-                      </th>
-                      <th class="w150 text-right">
-                        <div class="th-search-acmt">
-                          <mat-form-field>
-                            <input type="text" matInput placeholder="Search ..." name="transaction_type"
-                              (keyup.enter)="getLedger()" #transaction_type="ngModel" [(ngModel)]="filter.transaction_type">
-                            <mat-autocomplete #search="matAutocomplete">
-                              <mat-option>
-                              </mat-option>
-                            </mat-autocomplete>
-                          </mat-form-field>
-                        </div>
-                      </th>
-                      <th class="text-right">&nbsp;</th>
-                      <th class="text-right">&nbsp;</th>
-                      <th class="w160">&nbsp;</th>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-              <div class="table-container">
-                <div class="table-content">
-                  <table>
-                    <ng-container *ngIf="!loader">
-                      <tr *ngFor="let row of ledgerData; let i =index">
-                        <td class="w60">{{i+1+sr_no}}</td>
-                        <td class="w150">{{row.date_created | date : 'dd MMM yyy ,h:mm a'}}</td>
-                        <td class="w150">{{row.transaction_type}}</td>
-                        <td class="text-right">
-                          <strong class="green-clr" *ngIf="row.credit > 0">+ {{row.credit}} pt</strong>
-                          <ng-container *ngIf="row.credit == 0">---</ng-container>
-                          <br>
-                          <ng-container *ngIf="row.credit > 0">{{row.transaction_remark}}</ng-container>
-                        </td>
-                        <td class="text-right">
-                          <strong class="red-clr" *ngIf="row.debit > 0">- {{row.debit}} pt</strong>
-                          <ng-container *ngIf="row.debit == 0">---</ng-container>
-                          <br>
-                          <ng-container *ngIf="row.debit > 0">{{row.transaction_remark}}</ng-container>
-                        </td>
-                        <td class="w160 text-right">
-                          <strong>{{row.balance}} pt</strong>
-                        </td>
-                      </tr>
-                    </ng-container>
-      
-                    <ng-container *ngIf="loader">
-                      <tr class="sk-loading" *ngFor="let row of [].constructor(10)">
-                        <td class="w60">
-                          <div>&nbsp;</div>
-                        </td>
-                        <td class="w150">
-                          <div>&nbsp;</div>
-                        </td>
-                        <td class="w150">
-                          <div>&nbsp;</div>
-                        </td>
-                        <td>
-                          <div>&nbsp;</div>
-                        </td>
-                        <td class="w160">
-                          <div>&nbsp;</div>
-                        </td>
-                      </tr>
-                    </ng-container>
-                  </table>
-                </div>
-              </div>
-              <ng-container *ngIf="ledgerData.length == 0">
-                <app-not-result-found></app-not-result-found>
-              </ng-container>
-            </div>
-      
-      
-            <div class="cs-table  horizontal-scroll" *ngIf="wallet_history_type== 'scan_history'">
-              <div class="sticky-head" style="top: -10px;">
-                <div class="table-head">
-                  <table>
-                    <tr>
-                      <th class="w60">Sr.No</th>
-                      <th class="w140">Coupon Code</th>
-                      <!-- <th class="w250">Product Detail</th>
-                      <th class="w100">Dispatch Date</th>
-                      <th class="w100">Dispatch Type</th>
-                      <th class="w250">Dealer Detail</th>
-                      <th class="w130">Invoice No.</th> -->
-                      <th class="w110 text-right">Coupon value</th>
-                      <th class="w100">Scan Date</th>
-                      <th class="w180">Bonus Name</th>
-                      <th class="w110 text-right">Bonus Point</th>
-      
-                    </tr>
-                  </table>
-                </div>
-              </div>
-      
-              <div class="table-container">
-                <div class="table-content">
-                  <table>
-                    <ng-container *ngIf="!loader">
-                      <tr *ngFor="let row of couponData let i = index;">
-                        <td class="w60">{{i+1+sr_no}}</td>
-                        <td class="w140">{{row.coupon_code?row.coupon_code:'---'}}</td>
-                        <!-- <td class="w250">{{row.product_detail?row.product_detail:'---'}}</td>
-                        <td class="w100">
-                          {{row.dispatch_date != "0000-00-00 00:00:00" ? (row.dispatch_date | date:'d MMM y') : '---'}}
-                        </td>
-                        <td class="w100">{{row.dispatch_type}}</td>
-                        <td class="w250">{{row.dr_detail}}</td>
-                        <td class="w130">{{row.invoice_number}}</td> -->
-                        <td class="w110 text-right">
-                          <strong>{{row.total_point?row.total_point + ' PT':'---'}}</strong>
-                        </td>
-                        <td class="w100">{{row.scanned_date | date:'d MMM y, h:mm a'}}</td>
-                        <td class="w180">{{row.bonus_scheme_name}}</td>
-                        <td class="w110 text-right"><strong>{{row.bonus_point?row.bonus_point + ' PT':'---'}}</strong></td>
-      
-                      </tr>
-                    </ng-container>
-      
-                    <ng-container *ngIf="loader">
-                      <tr class="sk-loading" *ngFor="let row of [].constructor(10)">
-                        <td class="w60">
-                          <div>&nbsp;</div>
-                        </td>
-                        <td class="w140">
-                          <div>&nbsp;</div>
-                        </td>
-                        <!-- <td class="w250">
-                          <div>&nbsp;</div>
-                        </td>
-                        <td class="w100">
-                          <div>&nbsp;</div>
-                        </td>
-                        <td class="w100">
-                          <div>&nbsp;</div>
-                        </td>
-                        <td class="w250">
-                          <div>&nbsp;</div>
-                        </td>
-                        <td class="w130">
-                          <div>&nbsp;</div>
-                        </td> -->
-                        <td class="w110 text-right">
-                          <div>&nbsp;</div>
-                        </td>
-                        <td class="w100">
-                          <div>&nbsp;</div>
-                        </td>
-                        <td class="w180">
-                          <div>&nbsp;</div>
-                        </td>
-                        <td class="w110 text-right">
-                          <div>&nbsp;</div>
-                        </td>
-      
-                      </tr>
-                    </ng-container>
-                    <ng-container *ngIf="couponData.length == 0">
-                      <app-not-result-found></app-not-result-found>
-                    </ng-container>
-                  </table>
-                </div>
-              </div>
-            </div>
-      
-      
-            <div class="cs-table horizontal-scroll" *ngIf="wallet_history_type== 'redeem_history'">
-              <div class="sticky-head">
-                <div class="table-head">
-                  <table>
-                    <tr>
-                      <th class="w60">Sr.No</th>
-                      <th class="w90">Date</th>
-                      <th class="w110">Req. ID</th>
-                      <th class="w200">Gift</th>
-                      <th class="w100 text-right">Points Request</th>
-                      <th class="w100 text-right">Equivalent Cash</th>
-                      <th class="w110">Redeem Status</th>
-                      <th class="w90">Payment Mode</th>
-      
-                      <th class="w150" >TXN ID</th>
-                      <th class="w100  text-center" >Status</th>
-                      <th class="w200" >TXN Remark</th>
-                      <!-- <th class="w110">Gift Points Status</th> -->
-                    </tr>
-                  </table>
-                </div>
-              </div>
-      
-              <div class="table-container">
-                <div class="table-content">
-                  <table>
-                    <ng-container *ngIf="!loader">
-                      <tr *ngFor="let row of redeemHistory; let i = index;">
-                        <td class="w60">{{i + 1 + sr_no}}</td>
-                        <td class="w90">{{row.date_created | date :'dd MMM yyyy'}}</td>
-                        <td class="w110">{{row.req_id ? row.req_id : '---'}}</td>
-                        <td class="w200">{{row.gift_name ? row.gift_name : '---'}}</td>
-                        <td class="w100 text-right"><strong>{{row.point ? row.point : '---'}}</strong></td>
-                        <td class="w100 text-right"><strong>{{row.cash_point ? row.cash_point : '---'}}</strong></td>
-                        <td class="w110"><strong class="{{row.status}}">{{row.status}}</strong> </td>
-                        <td class="w90"><strong>{{row.payment_mode ? row.payment_mode : '---'}}</strong></td>
-      
-                        <!-- <td class="w110"><strong class="{{row.gift_status}}">{{row.gift_status ? row.gift_status :
-                            '---'}}</strong></td> -->
-      
-                            <td class="w150" >
-                              <ng-container >
-                                {{row.razorpay_payout_id}}
-                              </ng-container>
-                              <ng-container>
-                                {{row.transaction_id}}
-                              </ng-container>
-                            </td>
-                            <td class="w100  text-center" >
-                              <strong class="{{row.transfer_status}}">{{row.transfer_status | titlecase}}</strong>
-      
-                            </td>
-      
-                            <td class="w200" >{{row.transfer_remark.replaceAll('_',' ') | titlecase}}
-                      </tr>
-                    </ng-container>
-      
-                    <ng-container *ngIf="loader">
-                      <tr class="sk-loading" *ngFor="let row of [].constructor(10)">
-                        <td class="w60">
-                          <div>&nbsp;</div>
-                        </td>
-                        <td class="w90">
-                          <div>&nbsp;</div>
-                        </td>
-                        <td class="w110">
-                          <div>&nbsp;</div>
-                        </td>
-                        <td class="w200">
-                          <div>&nbsp;</div>
-                        </td>
-                        <td class="w100">
-                          <div>&nbsp;</div>
-                        </td>
-                        <td class="w100">
-                          <div>&nbsp;</div>
-                        </td>
-                        <td class="w110">
-                          <div>&nbsp;</div>
-                        </td>
-                         <td class="w90">
-                          <div>&nbsp;</div>
-                        </td>
-                        <td class="w150">
-                          <div>&nbsp;</div>
-                        </td>
-                        <td class="w100">
-                          <div>&nbsp;</div>
-                        </td>
-                        <td class="w200">
-                          <div>&nbsp;</div>
-                        </td>
-                      </tr>
-                    </ng-container>
-                    <ng-container *ngIf="redeemHistory.length == 0">
-                      <app-not-result-found></app-not-result-found>
-                    </ng-container>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
 
 
         <div *ngIf="tabType== 'Point Ledger'" style="margin: -10px -10px 0px -10px;">

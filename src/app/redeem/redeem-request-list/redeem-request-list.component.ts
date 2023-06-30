@@ -78,7 +78,8 @@ export class RedeemRequestListComponent implements OnInit {
   }
   redeemRequestList() {
     this.filter.status = this.active_tab;
-    this.filter.redeemType = this.redeemType;
+    // this.filter.paymentMode = this.redeemType;
+    this.filter.redeem_type = this.redeemType;
     this.loader = true;
     if (this.pagenumber > this.total_page) {
       this.pagenumber = this.total_page;
@@ -111,7 +112,7 @@ export class RedeemRequestListComponent implements OnInit {
         } else {
           this.datanotfound = false
         }
-    
+
         if (this.pagenumber > this.total_page) {
           this.pagenumber = this.total_page;
           this.start = this.pageCount - this.page_limit;
@@ -138,7 +139,15 @@ export class RedeemRequestListComponent implements OnInit {
   public onDate(event): void {
     if (this.filter.last_status_updated_on) {
       this.filter.last_status_updated_on = moment(event.value).format('YYYY-MM-DD');
-    } else {
+    }
+
+   else if (this.filter.transfer_date) {
+      this.filter.transfer_date = moment(event.value).format('YYYY-MM-DD');
+    }
+    else if (this.filter.shipped_date) {
+      this.filter.shipped_date = moment(event.value).format('YYYY-MM-DD');
+    }
+    else {
       this.filter.date_created = moment(event.value).format('YYYY-MM-DD');
     }
     this.redeemRequestList();
@@ -273,5 +282,5 @@ export class RedeemRequestListComponent implements OnInit {
     }
   }
 
-  
+
 }
