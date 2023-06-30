@@ -6,6 +6,8 @@ import { DialogComponent } from 'src/app/dialog.component';
 import * as moment from 'moment';
 import { sessionStorage } from 'src/app/localstorage.service';
 import { Location } from '@angular/common';
+import { UploadFileModalComponent } from 'src/app/upload-file-modal/upload-file-modal.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-coupon-code-add',
@@ -34,7 +36,7 @@ export class CouponCodeAddComponent implements OnInit {
   today_date: Date;
 
 
-  constructor(public location: Location, public service: DatabaseService, public route: ActivatedRoute, public rout: Router, public toast: ToastrManager, public dialog: DialogComponent, public session: sessionStorage) {
+  constructor(public location: Location, public service: DatabaseService, public route: ActivatedRoute, public rout: Router, public toast: ToastrManager, public dialog: DialogComponent, public session: sessionStorage,public dialog2: MatDialog) {
     this.page_limit = service.pageLimit;
     this.uploadurl = service.uploadUrl;
     this.assign_login_data = this.session.getSession();
@@ -229,5 +231,25 @@ export class CouponCodeAddComponent implements OnInit {
 
   back() {
     this.location.back()
+  }
+
+  upload_excel() {
+    const dialogRef = this.dialog2.open(UploadFileModalComponent, {
+      width: '500px',
+      panelClass: 'cs-modal',
+      data: {
+        'from': 'Coupon',
+        // 'modal_type': type,
+
+
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != false) {
+       this.generated_coupon_listing();
+
+      }
+
+    });
   }
 }
