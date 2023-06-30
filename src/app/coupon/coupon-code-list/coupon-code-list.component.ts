@@ -6,6 +6,7 @@ import { ToastrManager } from 'ng6-toastr-notifications';
 import { DialogComponent } from 'src/app/dialog.component';
 import { MatDialog } from '@angular/material';
 import { CouponDetailModalComponent } from '../coupon-detail-modal/coupon-detail-modal.component';
+import { UploadFileModalComponent } from 'src/app/upload-file-modal/upload-file-modal.component';
 
 
 
@@ -225,7 +226,7 @@ export class CouponCodeListComponent implements OnInit {
 
   exportAsXLSX(status) {
     this.loader = true;
-    this.service.post_rqst({ 'filter': this.filter, 'start': this.start, 'pagelimit': this.page_limit }, '/Excel/scanned_coupon_code_list').subscribe((result => {
+    this.service.post_rqst({ 'filter': this.filter, 'start': this.start, 'pagelimit': this.page_limit }, '/Excel/coupon_code_all_list').subscribe((result => {
       if (result['msg'] == true) {
         this.loader = false;
         window.open(this.downurl + result['filename'])
@@ -265,6 +266,8 @@ export class CouponCodeListComponent implements OnInit {
 
     })
   }
+
+
 
 
 

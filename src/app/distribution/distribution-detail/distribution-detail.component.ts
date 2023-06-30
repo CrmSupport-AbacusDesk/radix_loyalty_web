@@ -27,7 +27,6 @@ export class DistributionDetailComponent implements OnInit {
     orderStatus: any = "Approved";
     month: any = 'Oct';
     ledgerType: any = "ledger"
-  wallet_history_type: any = 'ledger'
     discountFlag: boolean = false;
     productType: any = 'top';
     dr_id: any;
@@ -589,45 +588,6 @@ export class DistributionDetailComponent implements OnInit {
             })
         }
     }
-    // pervious(page) {
-    //     this.start = this.start - this.page_limit;
-    //     if (page == 'checkin') {
-    //         this.getCheckin();
-    //     } else if (page == 'segment') {
-    //         this.getSegment()
-    //     } else if (page == 'primary') {
-
-    //         this.getPrimaryOrder('', this.currentMonth_no, this.currentYear, this.orderStatus)
-    //     } else if (page == 'secondary') {
-
-    //         this.getSecondaryOrder('', this.currentMonth_no, this.currentYear, this.orderStatus)
-    //     } else if (page == 'retailer') {
-    //         this.getRetailer()
-
-    //     } else if (page == 'ledger') {
-    //         if (this.ledgerType == 'ledger') {
-    //             this.getLedger()
-    //         } else
-    //             if (this.ledgerType == 'billing') {
-    //                 this.invoice_data(this.invoiceMonth, this.invoiceYear)
-    //             } else
-    //                 if (this.ledgerType == 'payment') {
-    //                     this.payment_data(this.paymentMonth, this.paymentYear);
-    //                 } else
-    //                     if (this.ledgerType == 'credit_note') {
-    //                         this.cn_data(this.cnMonth, this.cnYear)
-    //                     }
-    //     }
-    //     else if (page == 'Point Ledger') {
-    //         this.getPointLedger()
-    //     }
-    //     else {
-
-    //     }
-
-    // }
-
-
     pervious(page) {
         this.start = this.start - this.page_limit;
         if (page == 'checkin') {
@@ -644,15 +604,18 @@ export class DistributionDetailComponent implements OnInit {
             this.getRetailer()
 
         } else if (page == 'ledger') {
-            if (this.wallet_history_type == 'ledger') {
-                this.getLedger();
-              }
-              if (this.wallet_history_type == 'scan_history') {
-                this.scan_history_data();
-              }
-              if(this.wallet_history_type == 'redeem_history'){
-                  this.redeem_history_data();
-              }
+            if (this.ledgerType == 'ledger') {
+                this.getLedger()
+            } else
+                if (this.ledgerType == 'billing') {
+                    this.invoice_data(this.invoiceMonth, this.invoiceYear)
+                } else
+                    if (this.ledgerType == 'payment') {
+                        this.payment_data(this.paymentMonth, this.paymentYear);
+                    } else
+                        if (this.ledgerType == 'credit_note') {
+                            this.cn_data(this.cnMonth, this.cnYear)
+                        }
         }
         else if (page == 'Point Ledger') {
             this.getPointLedger()
@@ -662,47 +625,6 @@ export class DistributionDetailComponent implements OnInit {
         }
 
     }
-
-
-    // nextPage(page) {
-    //     this.start = this.start + this.page_limit;
-    //     if (page == 'checkin') {
-
-    //         this.getCheckin();
-    //     } else if (page == 'segment') {
-
-    //         this.getSegment()
-    //     } else if (page == 'primary') {
-
-    //         this.getPrimaryOrder('', this.currentMonth_no, this.currentYear, this.orderStatus)
-    //     } else if (page == 'secondary') {
-
-    //         this.getSecondaryOrder('', this.currentMonth_no, this.currentYear, this.orderStatus)
-    //     } else if (page == 'retailer') {
-    //         this.getRetailer()
-
-    //     } else if (page == 'ledger') {
-    //         if (this.ledgerType == 'ledger') {
-    //             this.getLedger()
-    //         } else
-    //             if (this.ledgerType == 'billing') {
-    //                 this.invoice_data(this.invoiceMonth, this.invoiceYear)
-    //             } else
-    //                 if (this.ledgerType == 'payment') {
-    //                     this.payment_data(this.paymentMonth, this.paymentYear);
-    //                 } else
-    //                     if (this.ledgerType == 'credit_note') {
-    //                         this.cn_data(this.cnMonth, this.cnYear)
-    //                     }
-    //     }
-    //     else if (page == 'Point Ledger') {
-    //         this.getPointLedger()
-    //     }
-    //     else {
-
-    //     }
-    // }
-    
 
     nextPage(page) {
         this.start = this.start + this.page_limit;
@@ -722,18 +644,18 @@ export class DistributionDetailComponent implements OnInit {
             this.getRetailer()
 
         } else if (page == 'ledger') {
-            if (this.wallet_history_type == 'ledger') {
-                console.log(this.wallet_history_type)
-        
-                this.getLedger();
-              }
-              if (this.wallet_history_type == 'scan_history') {
-                this.scan_history_data();
-              }
-        
-              if (this.wallet_history_type == 'redeem_history') {
-                this.redeem_history_data();
-              }
+            if (this.ledgerType == 'ledger') {
+                this.getLedger()
+            } else
+                if (this.ledgerType == 'billing') {
+                    this.invoice_data(this.invoiceMonth, this.invoiceYear)
+                } else
+                    if (this.ledgerType == 'payment') {
+                        this.payment_data(this.paymentMonth, this.paymentYear);
+                    } else
+                        if (this.ledgerType == 'credit_note') {
+                            this.cn_data(this.cnMonth, this.cnYear)
+                        }
         }
         else if (page == 'Point Ledger') {
             this.getPointLedger()
@@ -1102,43 +1024,36 @@ export class DistributionDetailComponent implements OnInit {
     }
 
     ledger_loader: boolean = false
-  ledgerData: any = [];
-
     getLedger() {
-        this.filter.status = this.tabType;
-        this.loader = true;
+        this.ledger_loader = true
         if (this.pagenumber > this.total_page) {
-          this.pagenumber = this.total_page;
-          this.start = this.pageCount - this.page_limit;
+            this.pagenumber = this.total_page;
+            this.start = this.pageCount - this.page_limit;
         }
         if (this.start < 0) {
-          this.start = 0;
+            this.start = 0;
         }
-    
-        this.serve.post_rqst({ 'id': this.dr_id, 'type': 'retailer', 'filter': this.filter, 'start': this.start, 'pagelimit': this.page_limit }, 'Influencer/influencerLedger').subscribe((resp) => {
-    
-          if (resp['statusCode'] == 200) {
-            this.ledgerData = resp['influencer_ledger'];
-            this.loader = false;
-            this.pageCount = resp['count'];
-            if (this.pagenumber > this.total_page) {
-              this.pagenumber = this.total_page;
-              this.start = this.pageCount - this.page_limit;
+        this.serve.post_rqst({ id: this.dr_id, 'filter': this.filter, 'start': this.start, 'pagelimit': this.page_limit, }, "CustomerNetwork/drLedgerListStatement").subscribe((result) => {
+            if (result['statusCode'] == 200) {
+                this.ledger_loader = false
+                this.ledger_data = result['dr_ledger_list'];
+                this.pageCount = result['count'];
+                if (this.pagenumber > this.total_page) {
+                    this.pagenumber = this.total_page;
+                    this.start = this.pageCount - this.page_limit;
+                }
+                else {
+                    this.pagenumber = Math.ceil(this.start / this.page_limit) + 1;
+                }
+                this.total_page = Math.ceil(this.pageCount / this.page_limit);
+                this.sr_no = this.pagenumber - 1;
+                this.sr_no = this.sr_no * this.page_limit;
+            } else {
+                this.ledger_loader = false
+                this.toast.errorToastr(result['statusMsg'])
             }
-            else {
-              this.pagenumber = Math.ceil(this.start / this.page_limit) + 1;
-            }
-            this.total_page = Math.ceil(this.pageCount / this.page_limit);
-            this.sr_no = this.pagenumber - 1;
-            this.sr_no = this.sr_no * this.page_limit;
-            setTimeout(() => {
-            }, 700)
-          }
-          else {
-            this.toast.errorToastr(resp['statusMsg']);
-          }
-        })
-      }
+        });
+    }
 
     invoice_listing: any = []
     invoice_calenderInfo: any = []
@@ -1420,102 +1335,4 @@ export class DistributionDetailComponent implements OnInit {
         this.rout.navigate(['/secondary-order-detail/' + id], { queryParams: { id, status } });
     }
 
-
-    redeemHistory: any = [];
-    noResult: boolean = false;
-  
-    redeem_history_data() {
-      if (this.pagenumber > this.total_page) {
-        this.pagenumber = this.total_page;
-        this.start = this.pageCount - this.page_limit;
-      }
-      if (this.start < 0) {
-        this.start = 0;
-      }
-      this.loader = true;
-  
-      if (this.filter.date_created) {
-        this.filter.date_created = moment(this.filter.date_created).format('YYYY-MM-DD');
-      }
-      this.filter.id = this.dr_detail.id;
-      this.serve.post_rqst({ 'filter': this.filter, 'start': this.start, 'pagelimit': this.page_limit }, 'Influencer/redeemHistory').subscribe((resp) => {
-        if (resp['statusCode'] == 200) {
-          this.redeemHistory = resp['result']
-          this.pageCount = resp['count'];
-          this.loader = false;
-  
-  
-          if (this.pagenumber > this.total_page) {
-            this.pagenumber = this.total_page;
-            this.start = this.pageCount - this.page_limit;
-          }
-  
-          else {
-            this.pagenumber = Math.ceil(this.start / this.page_limit) + 1;
-          }
-          this.total_page = Math.ceil(this.pageCount / this.page_limit);
-          this.sr_no = this.pagenumber - 1;
-          this.sr_no = this.sr_no * this.page_limit;
-  
-          setTimeout(() => {
-            if (this.redeemHistory.length == 0) {
-              this.noResult = true;
-            }
-          }, 500);
-        }
-        else {
-          this.toast.errorToastr(resp['statusMsg']);
-        }
-  
-      })
-    }
-  
-    couponData: any = [];
-  
-    scan_history_data() {
-      if (this.pagenumber > this.total_page) {
-        this.pagenumber = this.total_page;
-        this.start = this.pageCount - this.page_limit;
-      }
-      if (this.start < 0) {
-        this.start = 0;
-      }
-  
-      if (this.filter.date_created) {
-        this.filter.date_created = moment(this.filter.date_created).format('YYYY-MM-DD');
-      }
-      this.loader = true;
-      this.filter.id = this.dr_detail.id;
-      this.serve.post_rqst({ 'filter': this.filter, 'start': this.start, 'pagelimit': this.page_limit }, 'Influencer/scanHistory').subscribe((resp) => {
-        if (resp['statusCode'] == 200) {
-          this.couponData = resp['result']
-          this.pageCount = resp['count'];
-          this.loader = false;
-  
-  
-          if (this.pagenumber > this.total_page) {
-            this.pagenumber = this.total_page;
-            this.start = this.pageCount - this.page_limit;
-          }
-  
-          else {
-            this.pagenumber = Math.ceil(this.start / this.page_limit) + 1;
-          }
-          this.total_page = Math.ceil(this.pageCount / this.page_limit);
-          this.sr_no = this.pagenumber - 1;
-          this.sr_no = this.sr_no * this.page_limit;
-  
-          setTimeout(() => {
-            if (this.couponData.length == 0) {
-              this.noResult = true;
-            }
-          }, 500);
-        }
-        else {
-          this.toast.errorToastr(resp['statusMsg']);
-        }
-  
-      })
-    }
-    
 }

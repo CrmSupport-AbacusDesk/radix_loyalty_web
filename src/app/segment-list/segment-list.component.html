@@ -35,10 +35,10 @@
               <th class="w100">Date Created</th>
               <th class="w100">Created By</th>
               <th>Category</th>
-              <th class="w100  text-center">Distributor Discount</th>
-              <th class="w100  text-center">Direct Dealer Discount</th>
-              <th class="w100  text-center">Dealer Discount</th>
-              <th class="w120  text-center">GST</th>
+              <!-- <th class="w100  text-center">Distributor Discount</th> -->
+              <!-- <th class="w100  text-center">Direct Dealer Discount</th> -->
+              <!-- <th class="w100  text-center">Dealer Discount</th> -->
+              <!-- <th class="w120  text-center">GST</th> -->
               <th class="w140  text-right">Total No. Of Products</th>
               <th class="w100 text-center" *ngIf="logined_user_data.edit_category_master=='1'">Status</th>
               <th class="w60 text-center" *ngIf="logined_user_data.edit_category_master=='1'">Action</th>
@@ -77,10 +77,10 @@
                   </mat-form-field>
                 </div>
               </th>
-              <th class="w100  text-center">&nbsp;</th>
-              <th class="w100  text-center">&nbsp;</th>
-              <th class="w100  text-center">&nbsp;</th>
-              <th class="w120  text-center">&nbsp;</th>
+              <!-- <th class="w100  text-center">&nbsp;</th> -->
+              <!-- <th class="w100  text-center">&nbsp;</th> -->
+              <!-- <th class="w100  text-center">&nbsp;</th> -->
+              <!-- <th class="w120  text-center">&nbsp;</th> -->
               <th class="w140"></th>
               <th class="w100 text-center" *ngIf="logined_user_data.edit_category_master=='1'">
                 <div class="th-search-acmt">
@@ -110,10 +110,10 @@
                 <td class="w100">{{dist.created_by_name && dist.created_by_name != '' ? dist.created_by_name : '--'}}
                 </td>
                 <td>{{dist.category}}</td>
-                <td class="w100  text-center">{{dist.distributor_discount}} %</td>
-                <td class="w100  text-center">{{dist.direct_dealer_discount}} %</td>
-                <td class="w100  text-center">{{dist.retailer_discount}} %</td>
-                <td class="w120  text-center">{{dist.gst}} %</td>
+                <!-- <td class="w100  text-center">{{dist.distributor_discount}} %</td> -->
+                <!-- <td class="w100  text-center">{{dist.direct_dealer_discount}} %</td> -->
+                <!-- <td class="w100  text-center">{{dist.retailer_discount}} %</td> -->
+                <!-- <td class="w120  text-center">{{dist.gst}} %</td> -->
                 <td class="w140 text-right">{{dist.product_count}}</td>
                 <td class="w100 text-center" *ngIf="logined_user_data.edit_category_master=='1'">
                   <mat-slide-toggle color="accent" [name]="'status'+i" [(ngModel)]="dist.segment_status"

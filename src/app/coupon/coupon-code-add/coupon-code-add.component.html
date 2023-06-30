@@ -5,11 +5,11 @@
     </a>
     <h2>Generate Coupon Codes</h2>
   </div>
-  
+
   <div class="container pt10 pl10 pr10 pb50" >
     <ng-container *ngIf="assign_login_data2.add_coupon_code == 1 || assign_login_data2.add_dispatch == 1">
       <form #f="ngForm" (ngSubmit)=" f.valid && submitDetail()">
-        <div class="row">
+        <!-- <div class="row">
           <div class="col s12">
             <div class="card pb0">
               <div class="card-head">
@@ -30,7 +30,7 @@
                       <p *ngIf="coupon_type.errors?.required">This field is required</p>
                     </div>
                   </div>
-                  
+
                   <div class="col s12 m5 l6">
                     <mat-form-field  appearance="outline">
                       <mat-label>Product</mat-label>
@@ -55,9 +55,9 @@
                       <p *ngIf="total_coupon.errors?.required">This field is required</p>
                     </div>
                   </div>
-                  
-                  
-                  <!-- <div class="col s12 m2 l2">
+
+
+                  <div class="col s12 m2 l2">
                     <mat-form-field  appearance="outline">
                       <mat-label>Batch No.</mat-label>
                       <input matInput placeholder="Type Here ..."  name="batch_no" #batch_no="ngModel" [(ngModel)]="data.batch_no" required>
@@ -65,9 +65,9 @@
                     <div class="alert alert-danger" *ngIf="batch_no.touched || f.submitted">
                       <p *ngIf="batch_no.errors?.required">This field is required</p>
                     </div>
-                  </div> -->
+                  </div>
                 </div>
-                  
+
                 <div class="row">
                   <div class="col s12 m3 l3">
                     <mat-form-field  appearance="outline">
@@ -81,26 +81,28 @@
             </div>
           </div>
         </div>
-        
-        <div class="row">
-          <div class="col s12">
-            <div class="text-right">
-              <button [ngClass]="{'loading': savingFlag == true}" mat-raised-button color="accent" type="submit" [disabled]="savingFlag == true">
-                {{savingFlag == true ? 'Please Wait' : 'Generate'}}
-              </button>
-            </div>
+         -->
+
+      </form>
+
+      <!-- <div class="row">
+        <div class="col s12">
+          <div class="text-right">
+            <button [ngClass]="{'loading': savingFlag == true}" mat-raised-button color="accent" type="submit" [disabled]="savingFlag == true">
+              {{savingFlag == true ? 'Please Wait' : 'Generate'}}
+            </button>
           </div>
         </div>
-      </form>
+      </div> -->
     </ng-container>
-    
-    
-    
+
+
+
     <div class="left-auto jfe df flex-gap-10">
       <a mat-icon-button  matTooltip="Refresh" (click)="refresh()">
         <i class="material-icons">refresh</i>
       </a>
-      
+
       <div class="pagination" *ngIf="coupon_summary_list.length > 0">
         <div class="pagination-content">
           Pages
@@ -118,7 +120,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="cs-table">
       <div class="">
         <div class="table-head">
@@ -137,7 +139,7 @@
             </tr>
           </table>
         </div>
-        
+
         <div class="table-head border-top">
           <table>
             <tr>
@@ -197,7 +199,7 @@
           </table>
         </div>
       </div>
-      
+
       <div class="table-container">
         <div class="table-content">
           <table>
@@ -217,7 +219,7 @@
                     <button  mat-icon-button *ngIf="assign_login_data2.add_coupon_code == 1" matTooltip="View Coupon" routerLink="coupon-code-detail/{{row.id}}">
                       <i class="material-icons edit">visibility</i>
                     </button>
-                    
+
                     <button  mat-icon-button  matTooltip="Delete" *ngIf="assign_login_data2.delete_coupon_code==1 && assign_login_data2.id==1" (click)="deletecoupon(row.id)">
                       <i class="material-icons del">delete</i>
                     </button>
@@ -241,12 +243,20 @@
             </ng-container>
           </table>
         </div>
-        
-        
+
+
         <ng-container *ngIf="coupon_summary_list.length == 0 && noResult">
           <app-not-result-found></app-not-result-found>
         </ng-container>
       </div>
     </div>
+  </div>
+
+  <div class="fab-btns">
+    <button  mat-fab class="excel" (click)="upload_excel();">
+      <img src="assets/img/excel.svg">
+      Upload Excel
+    </button>
+
   </div>
 </div>
