@@ -5,12 +5,12 @@
             <i class="material-icons">arrow_back</i>
         </a>
         <h2>Product Details</h2>
-        
+
         <div class="left-auto" *ngIf="logined_user_data.edit_products_master=='1'">
             <button matTooltip="Edit product" *ngIf="logined_user_data.edit_products_master=='1'" [routerLink]="[ 'add-product/', this.product_id ]" mat-raised-button color="primary"><i class="material-icons">edit</i> Edit product</button>
         </div>
     </div>
-    
+
     <div class="container pt10 pl10 pr10 pb50" >
         <div class="row">
             <div class="col s12 m12 l8">
@@ -25,49 +25,49 @@
                                 <span>Date Created</span>
                                 <p>{{getData.date_created | date}}</p>
                             </div>
-                            
+
                             <div class="block-feilds">
                                 <span>Category</span>
                                 <p>{{getData.category}}</p>
                             </div>
-                            
+
                             <div class="block-feilds">
                                 <span>Sub Category</span>
                                 <p>{{getData.sub_category_name}}</p>
                             </div>
-                            
+
                             <div class="block-feilds">
                                 <span>Name</span>
                                 <p>{{getData.product_name}}</p>
                             </div>
-                            
+
                             <div class="block-feilds">
                                 <span>Product Code</span>
                                 <p>{{getData.product_code}}</p>
                             </div>
-                            
-                            
-                            
-                            <div class="block-feilds">
+
+
+
+                            <!-- <div class="block-feilds">
                                 <span>Master Packing Size</span>
                                 <p>{{getData.master_packing_size ? getData.master_packing_size :'---'}}</p>
                             </div>
-                            
+
                             <div class="block-feilds">
                                 <span>Small Packing Size</span>
                                 <p>{{getData.small_packing_size ? getData.small_packing_size :'---'}}</p>
                             </div>
-                            
+
                             <div class="block-feilds">
                                 <span>Brand</span>
                                 <p>{{getData.brand ? getData.brand :'---'}}</p>
-                            </div>
-                            
-                            
-                            <div class="block-feilds">
+                            </div> -->
+
+
+                            <!-- <div class="block-feilds">
                                 <span>Color</span>
                                 <p>{{getData.color ? getData.color :'---'}}</p>
-                            </div>
+                            </div> -->
 
                             <div class="block-feilds">
                                 <span>Product Scanning</span>
@@ -81,17 +81,17 @@
                                 <span>Box item with QR</span>
                                 <p>{{getData.boxWOItem=='1' ? 'No' :'Yes'}}</p>
                             </div>
-                            
+
                             <div class="block-feilds">
                                 <span>Status</span>
                                 <p>{{getData.status == '1' ?  'Active' : "Inactive"}}</p>
                             </div>
-                            
+
                             <div class="block-feilds">
                                 <span>Last Updated By</span>
                                 <p>{{getData.last_updated_by_name ? getData.last_updated_by_name : '--'}}</p>
                             </div>
-                            
+
                             <div class="block-feilds">
                                 <span>Last Updated On</span>
                                 <p>
@@ -99,7 +99,7 @@
                                 </p>
                             </div>
                         </div>
-                        
+
                         <div class="grid-box single mt16">
                             <div class="block-feilds">
                                 <span>Description</span>
@@ -109,8 +109,8 @@
                     </div>
                 </div>
                 <!-- product data end -->
-                
-                
+
+
                 <!-- Skeleton start -->
                 <div class="card" *ngIf="skLoading">
                     <div class="sk-head">
@@ -125,7 +125,7 @@
                     </div>
                 </div>
                 <!-- Skeleton end -->
-                
+
             </div>
             <div class="col s12 m12 l4">
                 <div class="card" *ngIf="!skLoading">
@@ -148,16 +148,16 @@
                     <div class="card-body">
                         <div class="img-container">
                             <div class="image-block sk-loading" *ngFor="let row of [].constructor(3)">
-                                &nbsp; 
+                                &nbsp;
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Skeleton end -->
-                
+
             </div>
         </div>
-        
+
         <div class="row" *ngIf="stateDetail.length > 0 ">
             <div class="col s12 m12 l12">
                 <div class="card">
@@ -177,7 +177,7 @@
                                             <th class="w130 text-right">DD Net Price</th>
                                             <th class="w100 text-center"  *ngIf="logined_user_data.edit_products_master=='1'">Action</th>
                                         </tr>
-                                        
+
                                         <tr>
                                             <th class="w50 text-center"></th>
                                             <th>&nbsp;</th>
@@ -213,7 +213,7 @@
                                     </table>
                                 </div>
                             </div>
-                            
+
                             <div class="table-container pb0">
                                 <div class="table-content none-shadow">
                                     <table>
@@ -269,7 +269,7 @@
                                                     </button>
                                                 </div>
                                             </td>
-                                        </tr>  
+                                        </tr>
                                     </table>
                                 </div>
                             </div>
@@ -277,7 +277,7 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
 </div>
 

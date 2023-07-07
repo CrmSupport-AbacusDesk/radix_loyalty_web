@@ -33,7 +33,7 @@
           (click)="active_tab = 'Close'; warrantyList()"><i class="material-icons">check_circle</i>Close
           ({{tabCount.Close}})</button>
       </div> -->
-    </div> 
+    </div>
   </div>
 
 
@@ -45,16 +45,13 @@
             <tr>
               <th class="w60">Sr.No.</th>
               <th class="w100">Date Created</th>
-              <th class="w100">battery serial no.</th>
-              <th class="w100">customer Purchase date</th>
-              <th class="w100">Customer Name - Customer Mobile no.</th>
-              <!-- <th class="w100">Customer Mobile no.</th> -->
-              <!-- <th class="w100">battery serial no.</th> -->
-              <th class="w100">Dealer name - Dealer Mobile no.</th>
-              <!-- <th class="w100">Dealer Mobile no.</th> -->
+              <th class="w100">Battery Type/Model</th>
+              <th class="w100">Battery Serial No.</th>
+              <th class="w100">Date Of Sale</th>
+              <th class="w100">Customer Name -Mobile no.</th>
+              <th class="w100">Dealer Name - Mobile no.</th>
               <th class="w100">Dealer Firm Name</th>
-
-              <!-- <th class="w150">Images</th> --> 
+              <!-- <th class="w150">Images</th> -->
             </tr>
           </table>
         </div>
@@ -76,16 +73,25 @@
               <th class="w100">
                 <div class="th-search-acmt">
                   <mat-form-field>
-                    <input type="text" matInput placeholder="Search ..." name="battery_serial_no"
-                      (keyup.enter)="warrantyList()" #battery_serial_no="ngModel" [(ngModel)]="filter.battery_serial_no">
+                    <input type="text" matInput placeholder="Search ..." name="model_no"
+                      (keyup.enter)="warrantyList()" #model_no="ngModel" [(ngModel)]="filter.model_no">
                   </mat-form-field>
                 </div>
               </th>
               <th class="w100">
                 <div class="th-search-acmt">
+                  <mat-form-field>
+                    <input type="text" matInput placeholder="Search ..." name="battery_serial_no"
+                      (keyup.enter)="warrantyList()" #battery_serial_no="ngModel" [(ngModel)]="filter.battery_serial_no">
+                  </mat-form-field>
+                </div>
+              </th>
+
+              <th class="w100">
+                <div class="th-search-acmt">
                   <mat-form-field class="cs-input date-column infix-bodr">
-                    <input matInput [matDatepicker]="picker2" placeholder="" name="customer_purchase_date"
-                      [(ngModel)]="filter.customer_purchase_date" (dateChange)="warrantyList()" disabled>
+                    <input matInput [matDatepicker]="picker2" placeholder="" name="sale_date"
+                      [(ngModel)]="filter.sale_date" (dateChange)="warrantyList()" disabled>
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                     <mat-datepicker #picker2 disabled="false"></mat-datepicker>
                   </mat-form-field>
@@ -163,12 +169,13 @@
       <div class="table-container">
         <div class="table-content">
           <table>
-            <ng-container>
+            <ng-container *ngIf="!loader">
               <tr *ngFor="let row of warrenty_list; let i = index;">
                 <td class="w60">{{i + 1 + sr_no}}</td>
                 <td class="w100">{{row.date_created | date:'d MMM y'}}</td>
+                <td class="w100">{{row.model_no}}</td>
                 <td class="w100">{{row.battery_serial_no}}</td>
-                <td class="w100">{{row.customer_purchase_date | date:'d MMM y'}}</td>
+                <td class="w100">{{row.sale_date | date:'d MMM y'}}</td>
                 <td class="w100">{{row.customer_name | titlecase}} - {{row.customer_mobile}}</td>
                 <td class="w100">{{row.dealer_name | titlecase}} - {{row.dealer_mobile}}</td>
                 <td class="w100">{{row.dealer_firm_name }}</td>
@@ -205,7 +212,7 @@
                 </td> -->
               </tr>
             </ng-container>
-<!-- 
+
             <ng-container *ngIf="loader">
               <tr class="sk-loading" *ngFor="let row of [].constructor(10)">
                 <td class="w60">
@@ -226,25 +233,14 @@
                 <td class="w100">
                   <div>&nbsp;</div>
                 </td>
-                <td>
+                <td class="w100">
                   <div>&nbsp;</div>
                 </td>
-                <td class="w150">
-                  <div>&nbsp;</div>
-                </td>
-                 <ng-container *ngIf="active_tab == 'Close'">
-                  <td>
-                    <div>&nbsp;</div>
-                  </td>
-                  <td class="w145">
-                    <div>&nbsp;</div>
-                  </td>
-                </ng-container> -->
-                <!-- <td *ngIf="active_tab != 'Close' && assign_login_data2.edit_support=='1'" class="w100 text-center">
+                <td class="w100">
                   <div>&nbsp;</div>
                 </td>
               </tr>
-            </ng-container> -->
+            </ng-container>
           </table>
         </div>
         <!-- <ng-container *ngIf="supportList_data.length == 0 && noResult == true">

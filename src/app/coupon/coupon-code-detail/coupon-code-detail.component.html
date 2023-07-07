@@ -5,11 +5,11 @@
     </a>
     <h2>Coupon Detail</h2>
   </div>
-  
+
   <div class="container pt10 pl10 pr10 pb50" >
-    
-    
-    
+
+
+
     <!-- ***** CASE 1 BOX WITH ITEM START***** -->
     <ng-container *ngIf="getData.box_type == 1">
       <div id="print_card" style="width: 50%;margin-left: 250px;" hidden>
@@ -19,9 +19,9 @@
               <ngx-qrcode [elementType]="elementType" value="{{row.coupon_code}}" cssClass="aclass qr_img_card" errorCorrectionLevel="L"> </ngx-qrcode>
               <span class='fix-text'>Box {{i+1}}</span>
               <span class='fix-code' style="text-align: left; margin-left: 5px;">{{row.coupon_code}}</span>
-              
+
             </div>
-            
+
             <ng-container *ngFor="let subRow of row.itembox">
               <div class="qr_img" style="width: 94.488188976px; margin: 0 auto;  height: 94.488188976px;  position: relative;">
                 <ngx-qrcode [elementType]="elementType" value="{{subRow.coupon_code}}" cssClass="aclass qr_img_card" errorCorrectionLevel="L"> </ngx-qrcode>
@@ -35,7 +35,7 @@
     </ng-container>
     <!-- ***** CASE 1 BOX WITH ITEM END***** -->
 
-    
+
     <!-- ***** CASE 2 ONLY BOX START ***** -->
     <ng-container   *ngIf="getData.box_type == 2">
       <div id="print_card" style="width: 50%;margin-left: 250px;" hidden>
@@ -53,7 +53,7 @@
     </ng-container>
     <!-- ***** CASE 2 ONLY BOX END ***** -->
 
-    
+
     <!-- ***** CASE 3 ONLY ITEM START***** -->
     <ng-container  *ngIf="getData.box_type == 3">
       <div id="print_card" style="width: 50%;margin-left: 250px;" hidden>
@@ -70,7 +70,7 @@
     </ng-container>
     <!-- ***** CASE 3 ONLY ITEM END***** -->
 
-  
+
     <div class="row">
       <div class="col s12 m12 l12">
         <div class="card" *ngIf="!skLoading">
@@ -83,12 +83,12 @@
                 <span>Date Created</span>
                 <p>{{getData.date_created | date:'d MMM y'}}</p>
               </div>
-              
+
               <div class="block-feilds">
                 <span>Created By</span>
                 <p>{{getData.created_by_name}}</p>
               </div>
-              
+
               <div class="block-feilds">
                 <span>Coupon Count</span>
                 <p>{{getData.total_coupon}}</p>
@@ -98,13 +98,13 @@
                 <p>{{getData.point_category_name ? getData.point_category_name : '---'}}</p>
               </div>
             </div>
-            
+
             <div class="grid-box two mt16">
               <div class="block-feilds">
                 <span>Product Detail</span>
                 <p>{{getData.product_detail}}</p>
               </div>
-              
+
               <div class="block-feilds" *ngIf="getData.remarks">
                 <span>Remark</span>
                 <p>{{getData.remarks}}</p>
@@ -112,8 +112,8 @@
             </div>
           </div>
         </div>
-        
-        
+
+
         <!-- Skeleton start -->
         <div class="card" *ngIf="skLoading">
           <div class="sk-head">
@@ -130,7 +130,7 @@
         <!-- Skeleton end -->
       </div>
     </div>
-    
+
     <div class="row mb100" *ngIf="!skLoading">
       <div class="col s12 m12 l12 grid-two-box">
         <div class="card" *ngFor="let row of qrCode; let i = index;">
@@ -161,8 +161,8 @@
                 </ul>
               </div>
               <div class="cs-barcode" *ngIf="getData.coupon_type == 'Master Box' ">
-                <ngx-qrcode 
-                [elementType]="elementType" 
+                <ngx-qrcode
+                [elementType]="elementType"
                 value="{{row.coupon_code}}"
                 cssClass="aclass"
                 errorCorrectionLevel="L">
@@ -170,17 +170,17 @@
               <span class="fix">{{i+1}} Box</span>
               <span class="qr-code-number">{{row.coupon_code}}</span>
             </div>
-            
+
             <div class="cs-barcode" *ngIf="getData.coupon_type == 'Item Box' ">
-              <ngx-qrcode 
-              [elementType]="elementType" 
+              <ngx-qrcode
+              [elementType]="elementType"
               value="{{row.coupon_code}}"
               cssClass="aclass"
               errorCorrectionLevel="L">
             </ngx-qrcode>
             <span class="qr-code-number">{{row.coupon_code}}</span>
           </div>
-          
+
         </div>
         <div class="qr-box" *ngFor="let subRow of row.itembox">
           <div class="qr-content">
@@ -195,29 +195,29 @@
                 <li>COUNTRY OF ORIGIN ITALY</li>
                 <li>Imported Packed and Marketed by</li>
               </ng-container>
-              <li>Pearl, Precision Products</li>
-              <li>PEARL PRECISION PRODUCTS PVT. LTD.</li>
-              <li>B-14, Block B, Sector 80, Noida, Uttar Pradesh 201305</li>
-              <li>Customer Care No:0120-4219233, 0120-4219235</li>
-              <li>Email- enquiry@pproducts.in</li>
+              <li>Radix - Journey So Far</li>
+              <li>Radix Power Solution</li>
+              <li>Khasra No-303, Village Bahchola,Mawana Road, Meerut</li>
+              <li>Customer Care No:1800 1202 21300</li>
+              <li>Email-info@radixbattery.com</li>
             </ul>
           </div>
           <div class="cs-barcode">
-            <ngx-qrcode 
-            [elementType]="elementType" 
+            <ngx-qrcode
+            [elementType]="elementType"
             value="{{subRow.coupon_code}}"
             cssClass="aclass"
             errorCorrectionLevel="L">
           </ngx-qrcode>
-          <span class="qr-code-number">{{subRow.coupon_code}}</span> 
+          <span class="qr-code-number">{{subRow.coupon_code}}</span>
         </div>
       </div>
     </div>
   </div>
-  
-  
-  
-  
+
+
+
+
 </div>
 </div>
 <div class="fab-btns" *ngIf="qrCode.length > 0">

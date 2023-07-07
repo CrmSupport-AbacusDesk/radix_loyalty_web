@@ -860,7 +860,7 @@ export class UploadFileModalComponent implements OnInit {
   bonusSample(type) {
     document.location.replace(this.uploadurl + 'sample_file/Assign Influencer Sample File.csv');
   }
-
+  existSerialNo:any=[];
   upload_bonus_user_data_excel() {
     this.dialogRef.disableClose = true;
     this.formData.append('file', this.file, this.file.name);
@@ -874,6 +874,8 @@ export class UploadFileModalComponent implements OnInit {
       .subscribe(d => {
 
         this.dialogRef.disableClose = false;
+        this.existSerialNo=d['product_not_available']
+        console.log(this.existSerialNo)
         this.formData = new FormData();
         if (d['statusCode'] == 200) {
           this.dialog.success("Excel Uploaded", d['statusMsg']);
@@ -883,22 +885,20 @@ export class UploadFileModalComponent implements OnInit {
 
           }, 700);
 
+          if (this.existSerialNo.length>0) {
+            this.dialog.error('This Product Code is Not Exist'+''+ d['product_not_available']);
+            this.dialogRef.close();
+            setTimeout(() => {
+              this.excel_loader = false;
 
-          return;
+            }, 700);
+
+          }
         }
 
-       else if (d['statusCode'] == 400) {
-          this.dialog.error(d['case']  +  d['product']);
-          this.dialogRef.close();
-          setTimeout(() => {
-            this.excel_loader = false;
 
-          }, 700);
-
-
-          return;
-        }
         else {
+
           this.dialog.error(d['statusMsg']);
           setTimeout(() => {
             this.excel_loader = false;

@@ -15,7 +15,7 @@ import { BottomSheetComponent } from 'src/app/bottom-sheet/bottom-sheet.componen
   selector: 'app-registraion-list',
   templateUrl: './registraion-list.component.html',
   styleUrls: ['./registraion-list.component.scss'],
-  
+
   animations: [slideToTop()]
 })
 export class RegistraionListComponent implements OnInit {
@@ -79,22 +79,17 @@ export class RegistraionListComponent implements OnInit {
     }
 
     if (this.filter.date_created) {
-
       this.filter.date_created = moment(this.filter.date_created).format('YYYY-MM-DD');
     }
-    if (this.filter.customer_purchase_date) {
-
-      this.filter.customer_purchase_date = moment(this.filter.customer_purchase_date).format('YYYY-MM-DD');
+    if (this.filter.sale_date) {
+      this.filter.sale_date = moment(this.filter.sale_date).format('YYYY-MM-DD');
     }
 
     this.service.post_rqst({ 'filter': this.filter,}, 'BatteryWarrantyRegistration/battery_warranty_list').subscribe((resp) => {
       console.log(resp);
-      
-      if (resp['statusCode'] == 200) {
 
+      if (resp['statusCode'] == 200) {
         this.warrenty_list = resp['result'];
-        console.log(this.warrenty_list);
-        
         this.tabCount = resp['tabCount'];
         this.pageCount = resp['count'];
         this.loader = false;
@@ -127,7 +122,7 @@ export class RegistraionListComponent implements OnInit {
     })
   }
 
-  
+
 
   refresh() {
     this.filter = {}

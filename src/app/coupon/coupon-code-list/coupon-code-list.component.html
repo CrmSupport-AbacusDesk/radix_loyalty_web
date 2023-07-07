@@ -26,7 +26,7 @@
         </div>
       </div> -->
       <div class="mat-tabbar">
-        <button mat-button [ngClass]="active_tab == 'master_box' ? 'active' : ''" (click)="active_tab = 'master_box'; couponCodeList()"><i class="material-icons">all_inbox</i>Box Coupon</button>
+        <!-- <button mat-button [ngClass]="active_tab == 'master_box' ? 'active' : ''" (click)="active_tab = 'master_box'; couponCodeList()"><i class="material-icons">all_inbox</i>Box Coupon</button> -->
         <button mat-button [ngClass]="active_tab == 'item_box' ? 'active' : ''" (click)="active_tab = 'item_box'; couponCodeList()"><i class="material-icons">category</i>Product Coupon</button>
         <button mat-button [ngClass]="active_tab == 'scan_item' ? 'active' : ''" (click)="active_tab = 'scan_item'; scanCouponList()"><i class="material-icons">qr_code_scanner</i>Scanned Coupon</button>
       </div>
@@ -49,11 +49,11 @@
               </ng-container>
               <th class="w140">{{active_tab == 'master_box' ? 'Box' : 'Product'}} Coupon Code</th>
               <th class="w250">Product Detail</th>
-              <th class="w100">Dispatch Date</th>
+              <!-- <th class="w100">Dispatch Date</th>
               <th class="w100">Dispatch Type</th>
               <th class="w250">Customer Detail</th>
               <th class="w130">Order No.</th>
-              <th class="w130">Gatepass No.</th>
+              <th class="w130">Gatepass No.</th> -->
             </tr>
           </table>
         </div>
@@ -100,7 +100,7 @@
               </th>
               <th class="w250">&nbsp;</th>
 
-              <th class="w100">
+              <!-- <th class="w100">
                 <div class="th-search-acmt">
                   <mat-form-field class="cs-input date-column infix-bodr">
                     <input matInput [matDatepicker]="dispatch_date" placeholder="Date" name="dispatch_date" [(ngModel)]="filter.dispatch_date" (dateChange)="couponCodeList()" [max]="today_date" disabled>
@@ -125,7 +125,7 @@
                     <input matInput placeholder="Search..." type="text" name="gatepass_number" [(ngModel)]="filter.gatepass_number" (keyup.enter)="couponCodeList()">
                   </mat-form-field>
                 </div>
-              </th>
+              </th> -->
             </tr>
           </table>
         </div>
@@ -147,13 +147,13 @@
                 </ng-container>
                 <td class="w140">{{row.coupon_code?row.coupon_code:'---'}}</td>
                 <td class="w250">{{row.product_detail?row.product_detail:'---'}}</td>
-                <td class="w100">
+                <!-- <td class="w100">
                   {{row.dispatch_date != "0000-00-00 00:00:00" ? (row.dispatch_date | date:'d MMM y') : '---'}}
                 </td>
                 <td class="w100">{{row.dispatch_type}}</td>
                 <td class="w250">{{row.dr_detail}}</td>
                 <td class="w130">{{row.invoice_number}}</td>
-                <td class="w130">{{row.gatepass_number?row.gatepass_number:'---'}}</td>
+                <td class="w130">{{row.gatepass_number?row.gatepass_number:'---'}}</td> -->
 
               </tr>
             </ng-container>
@@ -172,11 +172,11 @@
                 </ng-container>
                 <td class="w140"><div>&nbsp;</div></td>
                 <td class="w250"><div>&nbsp;</div></td>
-                <td class="w100"><div>&nbsp;</div></td>
+                <!-- <td class="w100"><div>&nbsp;</div></td>
                 <td class="w100"><div>&nbsp;</div></td>
                 <td class="w250"><div>&nbsp;</div></td>
                 <td class="w130"><div>&nbsp;</div></td>
-                <td class="w130"><div>&nbsp;</div></td>
+                <td class="w130"><div>&nbsp;</div></td> -->
                 <ng-container  *ngIf="active_tab == 'scan_item'">
                   <td class="w110"><div>&nbsp;</div></td>
                   <td class="w150"><div>&nbsp;</div></td>
@@ -208,15 +208,15 @@
               <th class="w60">Sr.No</th>
               <th class="w140">Coupon Code</th>
               <th class="w250">Product Detail</th>
-              <th class="w100">Dispatch Date</th>
+              <!-- <th class="w100">Dispatch Date</th>
               <th class="w100">Dispatch Type</th>
               <th class="w250">Dealer Detail</th>
-              <th class="w130">Invoice No.</th>
+              <th class="w130">Invoice No.</th> -->
               <th class="w110 text-right">Coupon value</th>
               <th class="w150">Scan By</th>
               <th class="w110">Mobile No.</th>
               <th class="w100">Scan Date</th>
-              <th class="w180">Bonus Name</th>
+              <!-- <th class="w180">Bonus Name</th> -->
               <th class="w110 text-right">Bonus Point</th>
               <th class="w70">Action</th>
             </tr>
@@ -236,7 +236,7 @@
               </th>
               <th class="w250">&nbsp;</th>
 
-              <th class="w100">
+              <!-- <th class="w100">
                 <div class="th-search-acmt">
                   <mat-form-field class="cs-input date-column infix-bodr">
                     <input matInput [matDatepicker]="dispatch_date" placeholder="Date" name="dispatch_date" [(ngModel)]="filter.dispatch_date" (dateChange)="scanCouponList()" [max]="today_date" disabled>
@@ -254,7 +254,7 @@
                     <input matInput placeholder="Search..." type="text" name="invoice_number" [(ngModel)]="filter.invoice_number" (keyup.enter)="scanCouponList()">
                   </mat-form-field>
                 </div>
-              </th>
+              </th> -->
 
               <th class="w110">&nbsp;</th>
               <th class="w150">
@@ -282,7 +282,7 @@
                   </mat-form-field>
                 </div>
               </th>
-              <th class="w180">&nbsp;</th>
+              <!-- <th class="w180">&nbsp;</th> -->
               <th class="w110">&nbsp;</th>
               <th class="w70">&nbsp;</th>
             </tr>
@@ -298,19 +298,19 @@
                 <td class="w60">{{i+1+sr_no}}</td>
                 <td class="w140">{{row.coupon_code?row.coupon_code:'---'}}</td>
                 <td class="w250">{{row.product_detail?row.product_detail:'---'}}</td>
-                <td class="w100">
+                <!-- <td class="w100">
                   {{row.dispatch_date != "0000-00-00 00:00:00" ? (row.dispatch_date | date:'d MMM y') : '---'}}
                 </td>
                 <td class="w100">{{row.dispatch_type}}</td>
                 <td class="w250">{{row.dr_detail}}</td>
-                <td class="w130">{{row.invoice_number}}</td>
+                <td class="w130">{{row.invoice_number}}</td> -->
                 <td class="w110 text-right">
                   <strong>{{row.total_point?row.total_point + ' PT':'---'}}</strong>
                 </td>
                 <td class="w150">{{row.scanned_by_name?row.scanned_by_name:'---'}}</td>
                 <td class="w110">{{row.scanned_by_mobile?row.scanned_by_mobile:'---'}}</td>
                 <td class="w100">{{row.scanned_date | date:'d MMM y, h:mm a'}}</td>
-                <td class="w180">{{row.bonus_scheme_name}}</td>
+                <!-- <td class="w180">{{row.bonus_scheme_name}}</td> -->
                 <td class="w110 text-right"><strong>{{row.bonus_point?row.bonus_point + ' PT':'---'}}</strong></td>
                 <td class="w70"><a class="link-btn" (click)="reopenCoupon(row.coupon_code)">Reopen</a></td>
               </tr>
@@ -322,14 +322,14 @@
                 <td class="w60"><div>&nbsp;</div></td>
                 <td class="w140"><div>&nbsp;</div></td>
                 <td class="w250"><div>&nbsp;</div></td>
-                <td class="w100"><div>&nbsp;</div></td>
+                <!-- <td class="w100"><div>&nbsp;</div></td>
                 <td class="w100"><div>&nbsp;</div></td>
                 <td class="w250"><div>&nbsp;</div></td>
-                <td class="w130"><div>&nbsp;</div></td>
+                <td class="w130"><div>&nbsp;</div></td> -->
                 <td class="w110"><div>&nbsp;</div></td>
                 <td class="w150"><div>&nbsp;</div></td>
                 <td class="w110"><div>&nbsp;</div></td>
-                <td class="w180"><div>&nbsp;</div></td>
+                <!-- <td class="w180"><div>&nbsp;</div></td> -->
                 <td class="w110"><div>&nbsp;</div></td>
                 <td class="w100"><div>&nbsp;</div></td>
                 <td class="w70"><div>&nbsp;</div></td>
@@ -364,7 +364,7 @@
       </button>
       <a mat-menu-item *ngIf="assign_login_data2.add_coupon_code=='1'" [ngClass]="{'pulse': fabBtnValue=='add'}"  color="primary"  routerLink="coupon-add" routerLinkActive="active">
         <mat-icon>qr_code</mat-icon>
-        <span>Generate Coupon {{data.scan_item}}</span>
+        <span>Upload Coupon {{data.scan_item}}</span>
       </a>
 
       <a mat-menu-item *ngIf="assign_login_data2.add_coupon_code=='1'" [ngClass]="{'pulse': fabBtnValue=='add'}"  color="primary" (click)="openScanLimitModal()">
