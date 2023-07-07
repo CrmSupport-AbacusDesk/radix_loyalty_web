@@ -156,7 +156,7 @@ export class RedeemRequestListComponent implements OnInit {
   openDialog(id, type, redeem_type, gift_status, amount): void {
     this.service.currentUserID = id
     if (gift_status == 'Approved') {
-      this.alert.confirm('You want to transfer ₹' + amount + '?').then((result) => {
+      this.alert.confirm('You want to Change Status'+ '?').then((result) => {
         if (result) {
           this.savingFlag = true;
           this.service.post_rqst({ 'status': gift_status, 'id': id, 'created_by_id': this.assign_login_data2.created_by, 'created_by_name': this.assign_login_data2.created_by_name }, 'RedeemRequest/redeemRequestStatusChange').subscribe((result) => {

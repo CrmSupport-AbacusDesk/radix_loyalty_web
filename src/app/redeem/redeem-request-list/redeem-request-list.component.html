@@ -49,12 +49,12 @@
               <th class="w100">Req. ID</th>
               <th class="w160">Name</th>
               <th class="w110">Mobile</th>
-              <th class="w110">A/C Status</th>
+              <!-- <th class="w110">A/C Status</th>
               <ng-container *ngIf="redeemType=='Cash'">
                 <th class="w110">Bank Name</th>
                 <th class="w150">Account No.</th>
                 <th class="w110">IFSC Code</th>
-              </ng-container>
+              </ng-container> -->
               <!-- <ng-container *ngIf="redeemType!='Bank'">
                 <th class="w150">{{redeemType == 'Paytm' ? 'Paytm Number': 'Khalti Number'}}</th>
               </ng-container> -->
@@ -114,7 +114,7 @@
                   </mat-form-field>
                 </div>
               </th>
-              <th class="w110"></th>
+              <!-- <th class="w110"></th> -->
               <!-- <th class="w110">
                 <div class="th-search-acmt">
                   <mat-form-field class="cs-input select-input">
@@ -130,7 +130,7 @@
                 </div>
               </th> -->
 
-              <ng-container *ngIf="redeemType=='Cash'">
+              <!-- <ng-container *ngIf="redeemType=='Cash'">
                 <th class="w110">
                   <div class="th-search-acmt">
                     <mat-form-field class="example-full-width cs-input select-input">
@@ -155,7 +155,7 @@
                     </mat-form-field>
                   </div>
                 </th>
-              </ng-container>
+              </ng-container> -->
               <!-- <ng-container *ngIf="redeemType!='Bank'">
                 <th class="w150">
                   <div class="th-search-acmt">
@@ -284,16 +284,16 @@
                 <td class="w110">{{row.date_created | date :'dd MMM yyyy'}}</td>
                 <td class="w100">{{row.req_id ? row.req_id : '---'}}</td>
 
-                <td class="w160">{{row.user_name ? (row.user_name | titlecase) : '---'}} ({{row.influencer_type}})</td>
+                <td class="w160">{{row.user_name ? (row.user_name | titlecase) : '---'}} ({{row.influencer_type?row.influencer_type:'Dealer'}})</td>
                 <td class="w110">{{row.mobile_no ? row.mobile_no : '---'}}</td>
-                <td class="w110 {{row.influencer_status}}"><strong>{{row.influencer_status ? row.influencer_status :
-                    '---'}}</strong></td>
+                <!-- <td class="w110 {{row.influencer_status}}"><strong>{{row.influencer_status ? row.influencer_status :
+                    '---'}}</strong></td> -->
                 <!-- <td class="w110">{{row.redeem_type ? row.redeem_type : '---'}}</td> -->
-                <ng-container *ngIf="redeemType=='Cash'">
+                <!-- <ng-container *ngIf="redeemType=='Cash'">
                   <td class="w110">{{row.bank_name ? (row.bank_name | titlecase) : '---'}}</td>
                   <td class="w150">{{row.account_no ? row.account_no : '---'}}</td>
                   <td class="w110">{{row.ifsc_code ? row.ifsc_code : '---'}}</td>
-                </ng-container>
+                </ng-container> -->
                 <!-- <ng-container *ngIf="redeemType!='Bank'">
                   <td class="w150">
                     {{row.wallet_number}}
@@ -383,7 +383,7 @@
                 <td class="w110">
                   <div>&nbsp;</div>
                 </td>
-                <td class="w110">
+                <!-- <td class="w110">
                   <div>&nbsp;</div>
                 </td>
 
@@ -397,7 +397,7 @@
                   <td class="w110">
                     <div>&nbsp;</div>
                   </td>
-                </ng-container>
+                </ng-container> -->
                 <!-- <ng-container *ngIf="redeemType!='Bank'">
                   <td class="w150">
                     <div>&nbsp;</div>

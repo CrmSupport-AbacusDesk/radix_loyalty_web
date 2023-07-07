@@ -18,21 +18,23 @@ export class DatabaseService implements OnInit {
 
 
     // build command:-  npm run ng-high-memory
- 
 
-    // <------------------ Test Link ------------------------------>
-    dbUrl = "https://radixbattery.basiq360.com/api/index.php/";
-    uploadUrl = "https://radixbattery.basiq360.com/api/uploads/";
-    downloadUrl = "https://radixbattery.basiq360.com/api/uploads/Download_excel/"; 
+      // <------------------ Test Link ------------------------------>
+    dbUrl = "https://dev.basiq360.com/radixbattery/api/index.php/";
+    uploadUrl = "https://dev.basiq360.com/radixbattery/api/uploads/";
+    downloadUrl = "https://dev.basiq360.com/radixbattery/api/uploads/Download_excel/";
+
+
 
     // <------------------ Live Link ------------------------------>
-    // dbUrl = "https://pearl.abacusdesk.com/api/index.php/"; 
-    // uploadUrl = "https://pearl.abacusdesk.com/api/uploads/";
-    // downloadUrl = "https://pearl.abacusdesk.com/api/uploads/Download_excel/";
+    // dbUrl = "https://radixbattery.basiq360.com/api/index.php/";
+    // uploadUrl = "https://radixbattery.basiq360.com/api/uploads/";
+    // downloadUrl = "https://radixbattery.basiq360.com/api/uploads/Download_excel/";
 
-  
-    
-    header: any = new HttpHeaders(); 
+
+
+
+    header: any = new HttpHeaders();
     data: any;
     myProduct: any = {};
     peraluser: any = {};
@@ -93,7 +95,7 @@ export class DatabaseService implements OnInit {
         this.data = { username, password };
         return this.http.post(this.dbUrl + "/login/submitnew/", JSON.stringify(this.data), { headers: this.header });
     }
-    
+
     public exportAsExcelFile(json: any[], excelFileName: string): void {
         const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
         const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };

@@ -28,6 +28,8 @@ export class DistributionDetailComponent implements OnInit {
     month: any = 'Oct';
     ledgerType: any = "ledger"
     discountFlag: boolean = false;
+     wallet_history_type: any = 'ledger'
+
     productType: any = 'top';
     dr_id: any;
     user_type: any;
@@ -76,7 +78,7 @@ export class DistributionDetailComponent implements OnInit {
         public alert: DialogComponent,
         public dialog: MatDialog,
         public session: sessionStorage,
-         
+
         public renderer: Renderer2,
         public location: Location,) {
         this.page_limit = serve.pageLimit;
@@ -94,11 +96,11 @@ export class DistributionDetailComponent implements OnInit {
             console.log(params);
             this.dr_id=params.id
             console.log(this.login_data);
-            
+
             this.distributorDetail();
         })
 
-        
+
         this.today_date = moment(new Date()).format("MMM - Y");
         this.session.getSession().subscribe(resp => {
             this.login_data = resp.data;
@@ -115,17 +117,17 @@ export class DistributionDetailComponent implements OnInit {
     ngAfterViewInit() {
         this.route.params.subscribe(params => {
             console.log(params);
-            
+
             this.dr_id = params.id;
 
             console.log(this.dr_id);
-            
+
             this.serve.currentUserID = params.id
             console.log('user id', this.serve.currentUserID)
             this.user_type = this.route.queryParams['_value']['type'];
             this.tabType=params.tabtype;
             console.log(this.tabType);
-             
+
             if (this.login_data.user_type=='DMS') {
                 history.pushState(null, null, location.href);
                 window.onpopstate = function () {
@@ -138,31 +140,31 @@ export class DistributionDetailComponent implements OnInit {
                     this.distributorTopSelling();
                 }
                 else  if (this.tabType=='Checkin') {
-                    this.clearFilter(); 
+                    this.clearFilter();
                     this.getCheckin();
                 }
                 else  if (this.tabType=='Segment') {
-                    this.clearFilter(); 
+                    this.clearFilter();
                     this.getSegment();
                 }
                 else  if (this.tabType=='Primary Order') {
-                    this.clearFilter(); 
+                    this.clearFilter();
                     this.getPrimaryOrder('',this.currentMonth_no,this.currentYear,'Approved');;
                 }
                 else  if (this.tabType=='Secondary Order') {
-                    this.clearFilter(); 
+                    this.clearFilter();
                     this.getSecondaryOrder('',this.currentMonth_no,this.currentYear,'Approved');;
                 }
                 else  if (this.tabType=='Retailer') {
-                    this.clearFilter(); 
+                    this.clearFilter();
                     this.getRetailer();
                 }
                 else  if (this.tabType=='Target') {
-                    this.clearFilter(); 
+                    this.clearFilter();
                     this.getTarget(this.currentMonth_no,this.currentYear);
                 }
                 else  if (this.tabType=='Ledger') {
-                    this.clearFilter(); 
+                    this.clearFilter();
                     this.getLedger();
                 }
             }
@@ -309,7 +311,7 @@ export class DistributionDetailComponent implements OnInit {
         let id = { "id": this.dr_id }
         this.serve.post_rqst(id, "CustomerNetwork/distributorDetail").subscribe((result) => {
             if (result['statusCode'] == 200) {
-                
+
                 this.dr_detail = result['distributor_detail'];
                 this.distributors = this.dr_detail['distributors'];
                 this.user_type=this.dr_detail['type']
@@ -468,7 +470,7 @@ export class DistributionDetailComponent implements OnInit {
                 }
                 console.log(this.dist_target);
                 console.log(this.dist_segment);
-                
+
                 setTimeout(() => {
                     this.barChart = new Chart(this.barCanvas.nativeElement, {
                         type: 'bar',
@@ -496,18 +498,18 @@ export class DistributionDetailComponent implements OnInit {
                                     borderColor: '#ffffff',
                                     borderWidth: 1
                                 },
-            
-            
-            
+
+
+
                             ]
                         },
-            
+
                     });
                 }, 1000);
             } else {
                 this.toast.errorToastr(result['statusMsg'])
             }
-            
+
         }))
     }
     // barChartMethod() {
@@ -620,6 +622,22 @@ export class DistributionDetailComponent implements OnInit {
         else if (page == 'Point Ledger') {
             this.getPointLedger()
         }
+
+        else if (this.tabType == 'transaction') {
+          if(this.wallet_history_type= 'ledger'){
+            this.getcustomerLedger()
+
+          }
+           if(this.wallet_history_type= 'scan_history'){
+           this.scan_history_data()
+
+          }
+
+           if(this.wallet_history_type= 'redeem_history'){
+            this.redeem_history_data()
+          }
+      }
+
         else {
 
         }
@@ -660,6 +678,21 @@ export class DistributionDetailComponent implements OnInit {
         else if (page == 'Point Ledger') {
             this.getPointLedger()
         }
+
+        else if (this.tabType == 'transaction') {
+          if(this.wallet_history_type= 'ledger'){
+            this.getcustomerLedger()
+
+          }
+           if(this.wallet_history_type= 'scan_history'){
+           this.scan_history_data()
+
+          }
+
+           if(this.wallet_history_type= 'redeem_history'){
+            this.redeem_history_data()
+          }
+      }
         else {
 
         }
@@ -1334,5 +1367,143 @@ export class DistributionDetailComponent implements OnInit {
     goTOSECONDARYDetail(id, status) {
         this.rout.navigate(['/secondary-order-detail/' + id], { queryParams: { id, status } });
     }
+
+
+
+    ledgerData:any=[]
+    getcustomerLedger() {
+      this.filter.status = this.tabType;
+      this.loader = true;
+      if (this.pagenumber > this.total_page) {
+        this.pagenumber = this.total_page;
+        this.start = this.pageCount - this.page_limit;
+      }
+      if (this.start < 0) {
+        this.start = 0;
+      }
+
+      this.serve.post_rqst({ 'id': this.dr_id, 'type': 'retailer', 'filter': this.filter, 'start': this.start, 'pagelimit': this.page_limit }, 'Influencer/influencerLedger').subscribe((resp) => {
+
+        if (resp['statusCode'] == 200) {
+          this.ledgerData = resp['influencer_ledger'];
+          this.loader = false;
+          this.pageCount = resp['count'];
+          if (this.pagenumber > this.total_page) {
+            this.pagenumber = this.total_page;
+            this.start = this.pageCount - this.page_limit;
+          }
+          else {
+            this.pagenumber = Math.ceil(this.start / this.page_limit) + 1;
+          }
+          this.total_page = Math.ceil(this.pageCount / this.page_limit);
+          this.sr_no = this.pagenumber - 1;
+          this.sr_no = this.sr_no * this.page_limit;
+          setTimeout(() => {
+          }, 700)
+        }
+        else {
+          this.toast.errorToastr(resp['statusMsg']);
+        }
+      })
+    }
+
+
+    couponData:any=[];
+    scan_history_data() {
+      if (this.pagenumber > this.total_page) {
+        this.pagenumber = this.total_page;
+        this.start = this.pageCount - this.page_limit;
+      }
+      if (this.start < 0) {
+        this.start = 0;
+      }
+
+      if (this.filter.date_created) {
+        this.filter.date_created = moment(this.filter.date_created).format('YYYY-MM-DD');
+      }
+      this.loader = true;
+      this.filter.id = this.dr_id;
+      this.serve.post_rqst({ 'filter': this.filter, 'start': this.start, 'pagelimit': this.page_limit }, 'Influencer/scanHistory').subscribe((resp) => {
+        if (resp['statusCode'] == 200) {
+          this.couponData = resp['result']
+          this.pageCount = resp['count'];
+          this.loader = false;
+
+
+          if (this.pagenumber > this.total_page) {
+            this.pagenumber = this.total_page;
+            this.start = this.pageCount - this.page_limit;
+          }
+
+          else {
+            this.pagenumber = Math.ceil(this.start / this.page_limit) + 1;
+          }
+          this.total_page = Math.ceil(this.pageCount / this.page_limit);
+          this.sr_no = this.pagenumber - 1;
+          this.sr_no = this.sr_no * this.page_limit;
+
+          setTimeout(() => {
+            if (this.couponData.length == 0) {
+              this.noResult = true;
+            }
+          }, 500);
+        }
+        else {
+          this.toast.errorToastr(resp['statusMsg']);
+        }
+
+      })
+    }
+
+
+
+    redeemHistory: any = [];
+  noResult: boolean = false;
+
+  redeem_history_data() {
+    if (this.pagenumber > this.total_page) {
+      this.pagenumber = this.total_page;
+      this.start = this.pageCount - this.page_limit;
+    }
+    if (this.start < 0) {
+      this.start = 0;
+    }
+    this.loader = true;
+
+    if (this.filter.date_created) {
+      this.filter.date_created = moment(this.filter.date_created).format('YYYY-MM-DD');
+    }
+    this.filter.id = this.dr_id;
+    this.serve.post_rqst({ 'filter': this.filter, 'start': this.start, 'pagelimit': this.page_limit }, 'Influencer/redeemHistory').subscribe((resp) => {
+      if (resp['statusCode'] == 200) {
+        this.redeemHistory = resp['result']
+        this.pageCount = resp['count'];
+        this.loader = false;
+
+
+        if (this.pagenumber > this.total_page) {
+          this.pagenumber = this.total_page;
+          this.start = this.pageCount - this.page_limit;
+        }
+
+        else {
+          this.pagenumber = Math.ceil(this.start / this.page_limit) + 1;
+        }
+        this.total_page = Math.ceil(this.pageCount / this.page_limit);
+        this.sr_no = this.pagenumber - 1;
+        this.sr_no = this.sr_no * this.page_limit;
+
+        setTimeout(() => {
+          if (this.redeemHistory.length == 0) {
+            this.noResult = true;
+          }
+        }, 500);
+      }
+      else {
+        this.toast.errorToastr(resp['statusMsg']);
+      }
+
+    })
+  }
 
 }
